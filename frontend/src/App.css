@@ -1,0 +1,350 @@
+/* ============================================================
+   Global Reset & Variables
+   ============================================================ */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --surface-hover: #22263a;
+    --border: #2e3250;
+    --accent: #6c63ff;
+    --accent-hover: #5a52e0;
+    --text-primary: #e8eaf6;
+    --text-secondary: #8b92b8;
+    --urgent: #ff5370;
+    --important: #ffcb6b;
+    --ignore: #82aaff;
+    --success: #c3e88d;
+    --radius: 10px;
+    --shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text-primary);
+    font-family: "Inter", "Segoe UI", sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* ============================================================
+   App Shell
+   ============================================================ */
+.app {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* ============================================================
+   Header
+   ============================================================ */
+.app-header {
+    background: linear-gradient(135deg, #23264e 0%, #1a1d27 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 18px 32px;
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    flex-shrink: 0;
+}
+
+.app-header h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: var(--text-primary);
+}
+
+.app-header p {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+/* ============================================================
+   Two-column layout
+   ============================================================ */
+.main-layout {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+/* ============================================================
+   Left Panel – Email List
+   ============================================================ */
+.email-list {
+    width: 300px;
+    flex-shrink: 0;
+    border-right: 1px solid var(--border);
+    background: var(--surface);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    padding: 20px 16px;
+}
+
+.email-list h2 {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-secondary);
+    margin-bottom: 14px;
+    padding-left: 4px;
+}
+
+.email-item {
+    padding: 14px 16px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    border: 1px solid transparent;
+    margin-bottom: 8px;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.email-item:hover {
+    background: var(--surface-hover);
+}
+
+.email-item--active {
+    background: var(--surface-hover);
+    border-color: var(--accent);
+}
+
+.email-item-subject {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.email-item-sender {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+/* ============================================================
+   Right Panel – Detail View
+   ============================================================ */
+.email-detail {
+    flex: 1;
+    padding: 32px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.placeholder {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    font-size: 1rem;
+    gap: 8px;
+}
+
+/* ============================================================
+   Email View
+   ============================================================ */
+.email-view {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+}
+
+.email-meta {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-size: 0.875rem;
+}
+
+.email-meta-label {
+    font-weight: 600;
+    color: var(--text-secondary);
+    min-width: 56px;
+}
+
+.email-body {
+    margin-top: 16px;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.7;
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+}
+
+/* ============================================================
+   Buttons
+   ============================================================ */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: var(--radius);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: background 0.2s, transform 0.1s;
+    width: fit-content;
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-primary {
+    background: var(--accent);
+    color: #fff;
+}
+
+.btn-primary:hover:not(:disabled) {
+    background: var(--accent-hover);
+}
+
+.btn-approve {
+    background: #1f3d2e;
+    color: var(--success);
+    border: 1px solid #2f6044;
+    margin-top: 16px;
+}
+
+.btn-approve:hover {
+    background: #254d39;
+}
+
+/* ============================================================
+   Loading Spinner
+   ============================================================ */
+.loading-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.spinner {
+    width: 20px;
+    height: 20px;
+    border: 3px solid var(--border);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ============================================================
+   Analysis Card
+   ============================================================ */
+.analysis-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+}
+
+.analysis-card h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+}
+
+.analysis-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 14px;
+}
+
+.analysis-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-secondary);
+    min-width: 130px;
+    padding-top: 2px;
+}
+
+/* ============================================================
+   Urgency Badges
+   ============================================================ */
+.badge {
+    display: inline-block;
+    padding: 4px 14px;
+    border-radius: 99px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.badge-urgent {
+    background: rgba(255, 83, 112, 0.2);
+    color: var(--urgent);
+    border: 1px solid var(--urgent);
+}
+
+.badge-important {
+    background: rgba(255, 203, 107, 0.15);
+    color: var(--important);
+    border: 1px solid var(--important);
+}
+
+.badge-ignore {
+    background: rgba(130, 170, 255, 0.15);
+    color: var(--ignore);
+    border: 1px solid var(--ignore);
+}
+
+/* ============================================================
+   Approved State
+   ============================================================ */
+.approved-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(195, 232, 141, 0.1);
+    border: 1px solid rgba(195, 232, 141, 0.3);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    color: var(--success);
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.approved-icon {
+    font-size: 1.5rem;
+}
